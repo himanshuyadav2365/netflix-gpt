@@ -1,5 +1,17 @@
 
+#NEtflix GPT 
 
+    -create react app
+    -configure tailwind css
+    -Header
+    -Routing of app
+    -Login form
+    -Signup Form
+    -useRef Hook
+    -Form validation
+    -Firebase deploy
+
+    
 #Features
 
     -login/signup page
