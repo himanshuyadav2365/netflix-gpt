@@ -7,14 +7,13 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { profile_photo } from "../utils/constants";
 
 const Login = () => {
   const [isSignIn, setSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const name = useRef("");
@@ -50,12 +49,12 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://media.licdn.com/dms/image/C5603AQEUvkL_8ZMybg/profile-displayphoto-shrink_800_800/0/1610806328769?e=1709164800&v=beta&t=fu5G2i93zfxv7zI3kACRWOIq3D_Y_WMA1SXuvRn4y1Q",
+            photoURL: profile_photo
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(addUser({ uid: uid, email, displayName, photoURL }));
-              navigate("browse");
+            //   navigate("browse");
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -65,7 +64,6 @@ const Login = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorCode + " -- " + errorMessage);
-          // ..
         });
     } else {
       signInWithEmailAndPassword(
@@ -76,7 +74,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          navigate("browse");
+        //   navigate("browse");
           // ...
         })
         .catch((error) => {
@@ -85,7 +83,7 @@ const Login = () => {
           setErrorMessage(errorCode + " -- " + errorMessage);
         });
     }
-    console.log("signup done");
+    
   };
 
   return (
