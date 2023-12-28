@@ -1,11 +1,21 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidation } from "../utils/validation";
-import { createUserWithEmailAndPassword ,signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+
 const Login = () => {
   const [isSignIn, setSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const name = useRef("");
   const email = useRef("");
@@ -25,10 +35,10 @@ const Login = () => {
     );
     setErrorMessage(message);
 
-    if (message!==null) {
+    if (message !== null) {
       return;
     }
-    
+
     if (!isSignIn) {
       createUserWithEmailAndPassword(
         auth,
@@ -38,34 +48,44 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          console.log(user);
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://media.licdn.com/dms/image/C5603AQEUvkL_8ZMybg/profile-displayphoto-shrink_800_800/0/1610806328769?e=1709164800&v=beta&t=fu5G2i93zfxv7zI3kACRWOIq3D_Y_WMA1SXuvRn4y1Q",
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(addUser({ uid: uid, email, displayName, photoURL }));
+              navigate("browse");
+            })
+            .catch((error) => {
+              setErrorMessage(error.message);
+            });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + " -- " + errorMessage);
+          // ..
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          navigate("browse");
           // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setErrorMessage(errorCode+" -- "+errorMessage)
-          // ..
+          setErrorMessage(errorCode + " -- " + errorMessage);
         });
     }
-
-    else{
-        signInWithEmailAndPassword(auth, email.current.value,
-            password.current.value)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log(user);
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    setErrorMessage(errorCode+" -- "+errorMessage)
-  });
-
-    }
-    console.log("signup done")
+    console.log("signup done");
   };
 
   return (
@@ -78,7 +98,7 @@ const Login = () => {
           className=" h-full w-full"
         />
       </div>
-      <form className="w-3/12  bg-black absolute text-white rounded-lg p-12 my-36 mx-auto right-0 left-0">
+      <form className="w-4/12  bg-black absolute text-white rounded-lg p-12 my-36 mx-auto right-0 left-0">
         <h1 className="font-bold text-3xl py-4">
           {isSignIn ? "Sign In" : "Sign Up"}
         </h1>

@@ -11,7 +11,7 @@
     -Form validation
     -Firebase deploy
 
-    
+
 #Features
 
     -login/signup page
