@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { options } from "../utils/constants";
 import { addTrailer } from "../utils/movieSlice";
 
 const useTrailerData=(movieId)=>{
 
     const dispatch=useDispatch()
+
     const getMovieVideos=()=>{
         fetch(
             "https://api.themoviedb.org/3/movie/"+movieId+"/videos?language=en-US",
@@ -18,7 +19,7 @@ const useTrailerData=(movieId)=>{
             })
             .catch((err) => console.error(err));
         }
-        
+
         useEffect(()=>{
             getMovieVideos()
         },[])
