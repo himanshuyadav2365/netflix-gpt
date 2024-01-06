@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import useMoviesData from "../hooks/useMoviesData";
 import MovieTitle from "./MovieTitle";
-import Secondary from "./Secondary";
 import Trailer from "./Trailer";
 
 const Primary = () => {
