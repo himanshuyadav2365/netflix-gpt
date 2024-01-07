@@ -48,7 +48,7 @@ const Header = () => {
         className='w-44' 
       />
       {user && <div className="flex px-2 items-center" >
-      <button className="text-white mx-4 bg-orange-700 px-4 py-2 rounded-md font-bold cursor-pointer" onClick={()=>dispatch(showGPTSearchToggle())}>{gptValue? "HomePage":"GPT Search"}</button>
+      <button className="text-white mx-4 bg-orange-600 px-4 py-2 rounded-md font-bold cursor-pointer" onClick={()=>dispatch(showGPTSearchToggle())}>{gptValue? "HomePage":"GPT Search"}</button>
         <img className="w-12 rounded-lg h-10 object-cover" alt="profile pic" src={user.photoURL}/>
         <p className="text-white px-2">{user.displayName}</p>
         <button className="text-white" onClick={handleSignout}>Signout</button>

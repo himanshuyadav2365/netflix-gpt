@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import GPTSearchPage from './GPTSearchPage'
 import Header from './Header'
 import Primary from './Primary'
 import Secondary from './Secondary'
@@ -11,7 +12,7 @@ const Browse = () => {
   return (
     <div>
         <Header/>
-        {gptValue? null:(<>
+        {gptValue? <GPTSearchPage/>:(<>
           <Primary/>
         <Secondary/>
         </>)}
