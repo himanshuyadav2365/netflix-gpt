@@ -1,12 +1,14 @@
 import React, { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { options } from "../utils/constants";
 import { addGPTMovie } from "../utils/GptSlice";
+import { lang } from "../utils/langConstants";
 import openai from "../utils/openai";
 
 const GPTSearch = () => {
   const inputref = useRef("");
   const dispatch=useDispatch()
+  const preferredlanguage=useSelector(store=>store.userSlice.preferredlanguage)
 
   const handleSubmit = async () => {
     console.log(inputref.current.value);
@@ -34,19 +36,18 @@ const GPTSearch = () => {
     })
 
     const gptMovie= await Promise.all(gptMoviePR)
-    console.log(gptMovie)
-    dispatch(addGPTMovie(gptMovie))
+    dispatch(addGPTMovie({movies:gptMovie,title:result}))
   };
 
   return (
-    <div className="text-white absolute font-bold py-[20%] mx-auto flex justify-center	w-full rounded-lg">
+    <div className="text-white py-[10%] mx-auto flex justify-center	w-full rounded-lg">
       <input
         ref={inputref}
         className="w-[35%] rounded-l-lg h-10 text-black px-2 mx-1"
-        placeholder="What would you like to watch today "
+        placeholder={lang[preferredlanguage].gptSearchPlaceholder}
       />
       <button className="bg-red-700 px-8 rounded-r-lg" onClick={handleSubmit}>
-        Search
+       {lang[preferredlanguage].search}
       </button>
     </div>
   );

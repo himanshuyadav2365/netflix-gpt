@@ -8,7 +8,7 @@ const Secondary = () => {
   return (
     movies && (
       <div className="bg-black pb-32">
-        <div className="-mt-52 relative z-10">
+        <div className="-mt-52 relative z-20">
           <MovieList title="Popular Movies" movies={movies?.results} />
           <MovieList movies={movies?.results} title="Now Playing" />
           <MovieList movies={movies?.results} title="Trending Movies" />
