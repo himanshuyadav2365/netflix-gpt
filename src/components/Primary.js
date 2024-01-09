@@ -10,7 +10,7 @@ const Primary = () => {
 
   if (!movieList) return;
 
-  const movie = movieList?.results[6];
+  const movie = movieList?.results[0];
   const { original_title, overview, id } = movie;
 
   return (
