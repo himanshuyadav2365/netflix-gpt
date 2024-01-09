@@ -6,7 +6,7 @@ const GPTSuggestion = () => {
   const movieTitles = useSelector((store) => store.gptSlice.gptMovieTitle);
   const gptMovies = useSelector((store) => store.gptSlice.gptMovies);
   return (
-    <div className="bg-black  text-white w-[95%] mx-8 p-8 bg-opacity-90">
+    <div className="bg-black  a text-white w-[95%] m-8 p-8 bg-opacity-90">
       {movieTitles.map((movie, index) => (
         <MovieList
           key={movie}
