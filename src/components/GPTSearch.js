@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { options } from "../utils/constants";
-import { addGPTMovie } from "../utils/GptSlice";
+import { addGPTMovie, setLoading } from "../utils/GptSlice";
 import { lang } from "../utils/langConstants";
 import openai from "../utils/openai";
 
@@ -9,8 +9,11 @@ const GPTSearch = () => {
   const inputref = useRef("");
   const dispatch=useDispatch()
   const preferredlanguage=useSelector(store=>store.userSlice.preferredlanguage)
+  const loading=useSelector(store=>store.gptSlice.loading)
 
   const handleSubmit = async () => {
+
+    dispatch(setLoading(true))
 
     const gptQuery =
       "Act as an movie recommendation system and suggest some movies for query  : " +
@@ -36,6 +39,7 @@ const GPTSearch = () => {
 
     const gptMovie= await Promise.all(gptMoviePR)
     dispatch(addGPTMovie({movies:gptMovie,title:result}))
+    dispatch(setLoading(false))
   };
 
   return (
@@ -45,8 +49,8 @@ const GPTSearch = () => {
         className=" w-full md:w-1/2 rounded-l-lg h-10 text-black px-2 mx-1 my-2"
         placeholder={lang[preferredlanguage].gptSearchPlaceholder}
       />
-      <button className="bg-red-700 px-8 rounded-r-lg my-2" onClick={handleSubmit}>
-       {lang[preferredlanguage].search}
+      <button className="bg-red-700 px-8 rounded-r-lg my-2" onClick={handleSubmit}>{loading?lang[preferredlanguage].loading:lang[preferredlanguage].search}
+       {/* {lang[preferredlanguage].search} */}
       </button>
     </div>
   );
