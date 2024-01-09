@@ -3,7 +3,7 @@ import React from "react";
 const MovieCard = ({ posterPath }) => {
   if(!posterPath) return null
   return (
-    <div className="w-48 mx-2  cursor-pointer">
+    <div className=" w-36 md:w-48 mx-2  cursor-pointer">
       <img
         className="rounded-lg"
         alt="movie_card"

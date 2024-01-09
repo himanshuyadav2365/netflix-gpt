@@ -39,13 +39,13 @@ const GPTSearch = () => {
   };
 
   return (
-    <div className="text-white py-[10%] mx-auto flex justify-center	w-full rounded-lg ">
+    <div className="text-white pt-[40%] md:pt-[10%] mx-1 flex justify-center	w-full rounded-lg ">
       <input
         ref={inputref}
-        className="w-[35%] rounded-l-lg h-10 text-black px-2 mx-1"
+        className=" w-full md:w-1/2 rounded-l-lg h-10 text-black px-2 mx-1 my-2"
         placeholder={lang[preferredlanguage].gptSearchPlaceholder}
       />
-      <button className="bg-red-700 px-8 rounded-r-lg" onClick={handleSubmit}>
+      <button className="bg-red-700 px-8 rounded-r-lg my-2" onClick={handleSubmit}>
        {lang[preferredlanguage].search}
       </button>
     </div>

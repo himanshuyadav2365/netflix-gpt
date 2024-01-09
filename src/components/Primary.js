@@ -14,7 +14,7 @@ const Primary = () => {
   const { original_title, overview, id } = movie;
 
   return (
-    <div>
+    <div className="pt-[35%] md:pt-0 bg-black">
       <MovieTitle movieTitle={original_title} overview={overview} />
       <Trailer movieId={id} />
     </div>

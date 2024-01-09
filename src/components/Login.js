@@ -93,10 +93,10 @@ const Login = () => {
         <img
           src="https://assets.nflxext.com/ffe/siteui/vlv3/563192ea-ac0e-4906-a865-ba9899ffafad/6b2842d1-2339-4f08-84f6-148e9fcbe01b/IN-en-20231218-popsignuptwoweeks-perspective_alpha_website_large.jpg"
           alt="background"
-          className=" h-full w-full"
+          className=" h-full w-full object-cover"
         />
       </div>
-      <form className="w-4/12  bg-black absolute text-white rounded-lg p-12 my-36 mx-auto right-0 left-0">
+      <form className=" w-full mx-2 md:w-4/12  bg-black absolute text-white rounded-lg p-12 my-36 mx-auto right-0 left-0 bg-opacity-80">
         <h1 className="font-bold text-3xl py-4">
           {isSignIn ? "Sign In" : "Sign Up"}
         </h1>
