@@ -11,7 +11,6 @@ const GPTSearch = () => {
   const preferredlanguage=useSelector(store=>store.userSlice.preferredlanguage)
 
   const handleSubmit = async () => {
-    console.log(inputref.current.value);
 
     const gptQuery =
       "Act as an movie recommendation system and suggest some movies for query  : " +
@@ -40,7 +39,7 @@ const GPTSearch = () => {
   };
 
   return (
-    <div className="text-white py-[10%] mx-auto flex justify-center	w-full rounded-lg">
+    <div className="text-white py-[10%] mx-auto flex justify-center	w-full rounded-lg ">
       <input
         ref={inputref}
         className="w-[35%] rounded-l-lg h-10 text-black px-2 mx-1"
