@@ -49,12 +49,12 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: profile_photo
+            photoURL: profile_photo,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(addUser({ uid: uid, email, displayName, photoURL }));
-            //   navigate("browse");
+              //   navigate("browse");
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -66,6 +66,7 @@ const Login = () => {
           setErrorMessage(errorCode + " -- " + errorMessage);
         });
     } else {
+      console.log(email.current.value, password.current.value);
       signInWithEmailAndPassword(
         auth,
         email.current.value,
@@ -74,7 +75,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-        //   navigate("browse");
+          //   navigate("browse");
           // ...
         })
         .catch((error) => {
@@ -83,7 +84,24 @@ const Login = () => {
           setErrorMessage(errorCode + " -- " + errorMessage);
         });
     }
-    
+  };
+
+  const guestLogin = (e) => {
+    e.preventDefault();
+    let name = "test6@gmail.com";
+    let pwd = "Abcdef@123";
+    signInWithEmailAndPassword(auth, name, pwd)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        //   navigate("browse");
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setErrorMessage(errorCode + " -- " + errorMessage);
+      });
   };
 
   return (
@@ -127,6 +145,14 @@ const Login = () => {
         >
           {isSignIn ? "Sign In" : "Sign Up"}
         </button>
+        {isSignIn && (
+          <button
+            className="p-4 my-4 bg-red-700 w-full rounded-lg cursor-pointer"
+            onClick={guestLogin}
+          >
+            Guest Login(Don't forgot to use GPT Search for better Experience)
+          </button>
+        )}
         <p className="cursor-pointer" onClick={toggleSignIn}>
           {isSignIn
             ? "Don't have Account.Sign Up Now"
