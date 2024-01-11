@@ -12,7 +12,7 @@ const Secondary = () => {
       <div className="bg-black pb-32">
         <div className=" -mt-24 md:-mt-52 relative z-20">
           <MovieList title="Popular Movies" movies={movies?.results} />
-          <MovieList movies={nowPlaying?.results} title="Popular TV Series" />
+          <MovieList movies={nowPlaying?.results} title="Top Rated Movies" />
           <MovieList movies={movies?.results} title="Trending Movies" />
           <MovieList movies={nowPlaying?.results} title="Upcoming Movies" />
         </div>

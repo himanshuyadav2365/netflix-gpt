@@ -9,7 +9,7 @@ const useNowPlayingMovies = () => {
   const nowPlayingMovies=useSelector(store=>store.movieSlice.movieList)
   const getnowPlayingMovies = async () => {
     const responsePr = await fetch(
-      "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
+      "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
       options
     );
     const response = await responsePr.json();
