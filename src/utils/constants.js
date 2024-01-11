@@ -16,6 +16,6 @@ export const options = {
 
 export const Supported_Languages = [
   { identifier: "en", lang: "English" },
-  { identifier: "hindi", lang: "Hindi" },
-  { identifier: "spanish", lang: "Spanish" },
+  { identifier: "hindi", lang: "हिंदी" },
+  { identifier: "spanish", lang: "español" },
 ];
