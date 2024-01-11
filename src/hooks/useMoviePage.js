@@ -1,14 +1,12 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { options } from "../utils/constants";
-import { addTrailer } from "../utils/movieSlice";
 
-const useTrailerData=(movieId)=>{
 
-    const dispatch=useDispatch()
-    const trailerVideo=useSelector(store=>store.movieSlice.trailerVideo)
+const useMovieData=(movieId)=>{
 
-    const getMovieVideos=()=>{
+    const [movie,setMovie]=useState(null)
+
+    const getMovieVideo=()=>{
         fetch(
             "https://api.themoviedb.org/3/movie/"+movieId+"/videos?language=en-US",
             options
@@ -17,16 +15,17 @@ const useTrailerData=(movieId)=>{
             .then((response) => {
             const video=response.results.filter((video)=>video.name==="Official Trailer");
             let result=video[0]?video[0]:response.results[0]
-                dispatch(addTrailer(result))
+               setMovie(result)
             })
             .catch((err) => console.error(err));
         }
 
         useEffect(()=>{
-            !trailerVideo && 
-            getMovieVideos()
+           getMovieVideo()
         },[])
-    
+
+        return movie
+
 }
 
-export default useTrailerData
+export default useMovieData

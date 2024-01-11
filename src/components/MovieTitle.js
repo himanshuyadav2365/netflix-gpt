@@ -3,7 +3,7 @@ import React from "react";
 const MovieTitle = ({ movieTitle, overview }) => {
     
   return (
-    <div className=" py-8 md:py-48 px-6 md:px-12 w-1/2 absolute text-white bg-gradident-to-r from-black">
+    <div className=" py-2 md:py-48 px-6 md:px-12 w-1/2 absolute text-white bg-gradident-to-r from-black">
       <h1 className="text-md md:text-6xl font-bold py-4">{movieTitle}</h1>
       <p className="hidden md:block py-4 text-lg">{overview}</p>
       <div className="flex">
